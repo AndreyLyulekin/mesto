@@ -1,0 +1,21 @@
+.footer_text {
+	color: white;
+	position: absolute;
+    top: 49px;
+    font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+}
+@media screen and (max-width: 320px) {
+    
+    .footer_text {
+        margin: 10px 19px;
+        width: 282px;
+		font-size: 14px;
+		line-height: 17px;
+		letter-spacing: 0em;
+		text-align: left;
+    }
+}
