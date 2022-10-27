@@ -22,9 +22,10 @@
 
 /*elements*/
 @import url(../blocks/elements/elements.css);
-@import url(../blocks/elements/_element/_element.css);
-@import url(../blocks/elements/_element/__description/__description.css);
-@import url(../blocks/elements/_element/__img/__img.css);
+@import url(../blocks/elements/element/element.css);
+@import url(../blocks/elements/element/__description/__description.css);
+@import url(../blocks/elements/element/__img/__img.css);
+@import url(../blocks/elements/element/__img/__img.css);
 
 
 /*pop-up*/
