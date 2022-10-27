@@ -16,7 +16,7 @@ overlayCLose.addEventListener('click', function () {
 
 //Изменить через форму, имя и описание профиля + закрытие поп-ап через сохранить
 
-let formElement = document.querySelector('.overlay_form');
+let formElement = document.querySelector('.overlay__form');
 
 function formSubmitHandler (evt) {
     evt.preventDefault(); 

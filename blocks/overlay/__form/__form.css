@@ -1,4 +1,4 @@
-.overlay_form {
+.overlay__form {
 	width: 430px;
 	height: 330px;
 	background-color: white;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 320px) {
-    .overlay_form {
+    .overlay__form {
         width: 282px;
         height: 322px;
     }

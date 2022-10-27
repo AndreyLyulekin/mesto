@@ -29,13 +29,13 @@
 
 /*pop-up*/
 @import url(../blocks/overlay/overlay.css);
-@import url(../blocks/overlay/_form/_form.css);
+@import url(../blocks/overlay/__form/__form.css);
 @import url(../blocks/overlay/__on/__on.css);
 @import url(../blocks/overlay/__close-button/__close-button.css);
 @import url(../blocks/overlay/__title/__title.css);
 @import url(../blocks/overlay/__save-button/__save-button.css);
-@import url(../blocks/overlay/_form/__header/__header.css);
-@import url(../blocks/overlay/_form/__input/__input.css);
+@import url(../blocks/overlay/__form/_header/_header.css);
+@import url(../blocks/overlay/__form/_input/_input.css);
 
 /*footer*/
 @import url(../blocks/footer/footer.css);
