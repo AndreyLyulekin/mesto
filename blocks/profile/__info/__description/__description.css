@@ -1,4 +1,4 @@
-.profile_info__description {
+.profile__subtitle {
 	color:  white;
 	font-family: 'Inter';
 	font-style: normal;
@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 320px) {
     
-    .profile_info__description {
+    .profile__subtitle {
 		font-size: 14px;
 		line-height: 17px;
 		letter-spacing: 0em;

@@ -1,4 +1,4 @@
-.overlay__form_header {
+.overlay__header {
 	font-family: Inter;
 	font-size: 24px;
 	font-weight: 900;
@@ -9,7 +9,7 @@
 	margin-top: 34px;
 }
 @media screen and (max-width: 320px) {
-    .overlay__form_header {
+    .overlay__header {
 		font-size: 18px;
 		line-height: 22px;
 		letter-spacing: 0em;

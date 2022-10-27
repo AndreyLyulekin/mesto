@@ -8,17 +8,17 @@
 
 /*root*/
 @import url(../blocks/header/header.css);
-@import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__line/__line.css);
+@import url(../blocks/header/logo/logo.css);
+@import url(../blocks/header/line/line.css);
 
 /*profile*/
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/__avatar.css);
-@import url(../blocks/profile/_info/__title/__title.css);
-@import url(../blocks/profile/_info/__description/__description.css);
+@import url(../blocks/profile/__info/__name/__name.css);
+@import url(../blocks/profile/__info/__description/__description.css);
 @import url(../blocks/profile/__button/__button.css);
-@import url(../blocks/profile/_info/_info.css);
-@import url(../blocks/profile/_info/__edit-button/__edit-button.css);
+@import url(../blocks/profile/__info/__info.css);
+@import url(../blocks/profile/__info/__edit-button/__edit-button.css);
 
 /*elements*/
 @import url(../blocks/elements/elements.css);
@@ -29,13 +29,15 @@
 
 /*pop-up*/
 @import url(../blocks/overlay/overlay.css);
+
+/*form*/
 @import url(../blocks/overlay/__form/__form.css);
-@import url(../blocks/overlay/__on/__on.css);
+@import url(../blocks/overlay/__on/overlay__on.css);
 @import url(../blocks/overlay/__close-button/__close-button.css);
-@import url(../blocks/overlay/__title/__title.css);
+@import url(../blocks/overlay/__name/__name.css);
 @import url(../blocks/overlay/__save-button/__save-button.css);
-@import url(../blocks/overlay/__form/_header/_header.css);
-@import url(../blocks/overlay/__form/_input/_input.css);
+@import url(../blocks/overlay/__form/__header/__header.css);
+@import url(../blocks/overlay/__form/__input/__input.css);
 
 /*footer*/
 @import url(../blocks/footer/footer.css);

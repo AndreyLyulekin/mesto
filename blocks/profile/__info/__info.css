@@ -1,4 +1,4 @@
-.profile_info {
+.profile__info {
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, 25px);
@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 320px) {
     
-    .profile_info {
+    .profile__info {
         max-width: 320px;
         min-height: 84px;
         display: grid;

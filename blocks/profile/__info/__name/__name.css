@@ -1,4 +1,4 @@
-.profile_info__title {
+.profile__name {
 	color: white;
 	font-family: 'Inter';
 	font-style: normal;
@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 320px) {
     
-    .profile_info__title {
+    .profile__name {
         max-width: 320px;
         min-height: 84px;
         display: flex;

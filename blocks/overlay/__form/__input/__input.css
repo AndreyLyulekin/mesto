@@ -1,4 +1,4 @@
-.overlay__form_input{
+.overlay__input{
 	width: 358px;
 	border: hidden;
 	border-bottom: 2px solid gray;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 320px) {
-    .overlay__form_input {
+    .overlay__input {
 		width: 238px;
 		margin-left: 22px;
     }

@@ -20,8 +20,8 @@ let formElement = document.querySelector('.overlay__form');
 
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
-let nameInput = document.querySelector('.overlay_form__nameInput').value;
-let jobInput = document.querySelector('.overlay_form__jobInput').value;
+let nameInput = document.querySelector('.overlay__input_type_name').value;
+let jobInput = document.querySelector('.overlay__input_type_job').value;
 let newName = document.getElementById('name');
 newName.textContent = nameInput;
 let newJob = document.getElementById('job');
