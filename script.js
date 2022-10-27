@@ -1,7 +1,7 @@
 
 //Открыть/закртыть форму редактирования
 
-let editForm = document.querySelector('.profile-info__edit-button');
+let editForm = document.querySelector('.profile__edit-btn');
 let overlayOpen = document.querySelector('.overlay');
 
 editForm.addEventListener('click', function () {

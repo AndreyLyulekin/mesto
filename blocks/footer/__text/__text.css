@@ -1,4 +1,4 @@
-.footer_text {
+.footer__text {
 	color: white;
 	position: absolute;
     top: 49px;
@@ -10,7 +10,7 @@
 }
 @media screen and (max-width: 320px) {
     
-    .footer_text {
+    .footer__text {
         margin: 10px 19px;
         width: 282px;
 		font-size: 14px;
