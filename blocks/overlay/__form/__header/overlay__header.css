@@ -1,5 +1,5 @@
 .overlay__header {
-	font-family: Inter;
+	font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
 	font-size: 24px;
 	font-weight: 900;
 	line-height: 29px;
@@ -7,6 +7,7 @@
 	text-align: left;
 	margin-left: 36px;
 	margin-top: 34px;
+	font-weight: normal;
 }
 @media screen and (max-width: 320px) {
     .overlay__header {

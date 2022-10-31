@@ -11,3 +11,10 @@
         padding: 28px 0 27px 27px;
     }
 }
+@media screen and (max-width: 768px) {
+    .logo {
+        width: 103px;
+        height: 24px;
+        padding: 28px 0 27px 27px;
+    }
+}

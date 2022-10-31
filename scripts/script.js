@@ -22,9 +22,9 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); 
 let nameInput = document.querySelector('.overlay__input_type_name').value;
 let jobInput = document.querySelector('.overlay__input_type_job').value;
-let newName = document.getElementById('name');
+let newName = document.querySelector('.profile__name');
 newName.textContent = nameInput;
-let newJob = document.getElementById('job');
+let newJob = document.querySelector('.profile__subtitle');
 newJob.textContent = jobInput;
 overlayOpen.classList.remove('overlay__on');
 }

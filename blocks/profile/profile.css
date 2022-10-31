@@ -14,3 +14,9 @@
         flex-direction: column;
     }
 }
+@media screen and (max-width: 768px) {
+    .profile {
+        display: flex;
+        flex-direction: column;
+    }
+}

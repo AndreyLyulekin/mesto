@@ -7,10 +7,10 @@
     height: 361px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 908px) {
     
     .element {
         margin: auto;
-        width: 282px;
+        width: 281px;
     }
 }

@@ -16,9 +16,10 @@
     width: 86%;
 }
 
-@media screen and (max-width: 320px) {
-    
+@media screen and (max-width: 908px) {
     .elements {
+        grid-template-columns: repeat(2, min-content);
+        justify-content: center;
         max-width: 320px;
         min-height: 84px;
         display: flex;
