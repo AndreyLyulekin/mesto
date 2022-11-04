@@ -1,0 +1,16 @@
+.element__case {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    max-width: 246px;
+    margin: 20px auto 0;
+    padding: 0;
+}
+
+@media screen and (min-width: 426px) {
+
+    .element__case {
+        max-width: 246px;
+    }
+}
