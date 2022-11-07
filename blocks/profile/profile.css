@@ -11,6 +11,6 @@
 @media screen and (min-width: 1280px) {
     .profile {
     flex-direction: row;
-    align-items: center;        
+    align-items: center;
     }
 }
