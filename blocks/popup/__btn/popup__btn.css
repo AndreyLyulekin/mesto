@@ -3,7 +3,7 @@
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
-    line-height: 1.21;
+    line-height: 17px;
     color: white;
     text-align: center;
     background-color: black;
@@ -26,5 +26,6 @@
     font-size: 18px;
     margin: 48px auto 37px;
     width: 358px;
+    line-height: 22px;
     }
 }

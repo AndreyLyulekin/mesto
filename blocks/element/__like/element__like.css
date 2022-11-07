@@ -5,9 +5,12 @@
     height: 19px;
     transition: opacity 0.2s;
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 22px 19px;
+    background-position: center;
 }
 
 .element__like:hover {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 

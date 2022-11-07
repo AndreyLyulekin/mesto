@@ -8,80 +8,96 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body>
-    <section class="popup">
+
+
+
+
+
+    <div class="popup">
         <form name="popupContainer" class="popup__container">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input name='username' type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_type_name">
-            <input name='userjob' type="text" placeholder="Исследователь океана" class="popup__input popup__input_type_job">
+            <input name='username' type="text" placeholder="Ваше имя" class="popup__input popup__input_type_name">
+            <input name='userjob' type="text" placeholder="Ваша работа" class="popup__input popup__input_type_job">
             <button type="submit" class="popup__btn">Сохранить</button>
             <button type="button" class="popup__exit" aria-label="Закрыть попап"></button>
         </form>
-    </section>
+    </div>
+
+
+
+
     <div class="root">
         <header class="header">
-            <img src="./images/logo.svg" class="logo" alt="Логотип">
+            <img src="./images/logo.svg" class="header__logo" alt="Логотип">
         </header>  
         <main>
+
+
+
+
             <section class="profile">
                 <img src="./images/avatar.jpg" class="profile__photo" alt="Ваш аватар">
                 <div class="profile__info-case">
                     <div class="profile__case">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button type="button" aria-label="Кнопка редактирования" class="profile__edit-btn">
-                            <img src="./images/Edit-Button.svg" alt="Кнопка редактирования">
-                        </button>
+                        <button type="button" aria-label="Кнопка редактирования" class="profile__edit-btn"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
-                <button type="button" aria-label="Кнопка добавления фото" class="profile__add-btn"><img src="./images/Profile-Button.svg" class="profile__plus" alt="Плюс кнопки добавить Фото"></button>
+                <button type="button" aria-label="Кнопка добавления фото" class="profile__add-btn"></button>
             </section>
+
+
+
+
+
             <section class="elements">
                 <div class="element">
                     <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Место" class="element__image">
                     <div class="element__case">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like" aria-label="Like-btn" type="button"></button>
+                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Место" class="element__image">
                     <div class="element__case">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like" aria-label="Like-btn" type="button"></button>
+                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Место" class="element__image">
                     <div class="element__case">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like" aria-label="Like-btn" type="button"></button>
+                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Место" class="element__image">
                     <div class="element__case">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like" aria-label="Like-btn" type="button"></button>
+                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Место" class="element__image">
                     <div class="element__case">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like" aria-label="Like-btn" type="button"></button>
+                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Место" class="element__image">
                     <div class="element__case">
                         <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <button class="element__like" aria-label="Like-btn" type="button"></button>
+                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
                     </div>
                 </div>
             </section>
         </main>
         <footer class="footer">
-            <p class="footer footer__text">&copy; 2020 Mesto Russia</p>
+            <p class="footer__text">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
     <script src="./scripts/script.js" defer></script>

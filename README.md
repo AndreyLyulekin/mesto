@@ -1,11 +1,11 @@
-title: Место
-subtitle: Первый сайт с элементами JS
+# Место
+## Первый сайт с элементами JS
 
-Файловая структура - BEM Nasted
+**Файловая структура - BEM Nasted**
 
-Используемые технологии:
+### Используемые технологии:
 
-- Flex 
-- Keyframes
-- API
-- Js Vanilla
+* Flex 
+* Keyframes
+* API
+* Js Vanilla
