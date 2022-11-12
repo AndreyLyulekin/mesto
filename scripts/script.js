@@ -133,7 +133,7 @@ function likeFillByTouch () {
 })}
 likeFillByTouch ()
 
-const popupImg = document.querySelector('.popup__scale-image')
+const popupImg = document.querySelector('.popup_scale-image')
 const currentCard = document.querySelectorAll('.element__image')
 const popupImage = document.querySelector('.popup__image')
 const popupSubtitle = document.querySelector('.popup__subtitle')
