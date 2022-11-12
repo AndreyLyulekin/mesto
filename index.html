@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body>
-    <div class="popup">
-        <div class="popup__container">
+
+
+
+<!-- Popup редактирования профиля -->
+    <div class="popup popup_profile">
+        <div class="popup__container popup__container-profile">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <button type="button" class="popup__exit" aria-label="Закрыть попап"></button>
+            <button type="button" class="popup__exit popup__exit-profile" aria-label="Закрыть попап"></button>
             <form name="profile-edit" class='popup__form'>
                 <input name='username' type="text" placeholder="Ваше имя" class="popup__input popup__input_type_name">
                 <input name='userjob' type="text" placeholder="Ваша работа" class="popup__input popup__input_type_job">
@@ -19,6 +23,33 @@
             </form>
         </div>
     </div>
+
+<!-- Popup добаваления карточки -->
+    <div class='popup popup_card'>
+        <div class="popup__container popup__container-card">
+            <h2 class="popup__title">Новое место</h2>
+            <button type="button" class="popup__exit popup__exit-card" aria-label="Закрыть попап"></button>
+            <form name="card-form" class='popup__form'>
+                <input name='username' type="text" placeholder="Введите название" class="popup__input popup__input_card_title">
+                <input name='userjob' type="text" placeholder="Вставьте ссылку на картину" class="popup__input popup__input_card_link">
+                <button type="submit" class="popup__btn">Создать</button>
+            </form>
+        </div>
+    </div>
+
+<!-- Popup просмотра картинки -->
+    <div class='popup popup__img'>
+        <div class='popup__content-image'>
+               <img src="#" alt='' class="popup__image"> 
+               <figcaption class="popup__subtitle"></figcaption>
+               <button type="button" class="popup__exit popup__exit-img" aria-label="Закрыть попап"></button>
+        </div>
+    </div>
+
+
+
+
+
     <div class="root">
         <header class="header">
             <img src="./images/logo.svg" class="header__logo" alt="Логотип">
@@ -36,54 +67,22 @@
                 <button type="button" aria-label="Кнопка добавления фото" class="profile__add-btn"></button>
             </section>
             <section class="elements">
-                <div class="element">
-                    <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Место" class="element__image">
-                    <div class="element__case">
-                        <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Место" class="element__image">
-                    <div class="element__case">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Место" class="element__image">
-                    <div class="element__case">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Место" class="element__image">
-                    <div class="element__case">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Место" class="element__image">
-                    <div class="element__case">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Место" class="element__image">
-                    <div class="element__case">
-                        <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
-                    </div>
-                </div>
             </section>
         </main>
         <footer class="footer">
             <p class="footer__text">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
+    <template id="card">
+        <div class="element">
+            <button type="button" aria-label="Кнопка удалить карточку" class="element__trash"></button>
+            <img class="element__image" alt="Место">
+            <div class="element__case">
+                <h2 class="element__title"></h2>
+                <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
+            </div>
+        </div>
+    </template> 
     <script src="./scripts/script.js" defer></script>
 </body>
 </html>
