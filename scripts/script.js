@@ -134,18 +134,18 @@ function likeFillByTouch () {
 likeFillByTouch ()
 
 const popupImg = document.querySelector('.popup_scale-image')
-const currentCard = document.querySelectorAll('.element__image')
+const currentCard = document.querySelectorAll('.element')
 const popupImage = document.querySelector('.popup__image')
 const popupSubtitle = document.querySelector('.popup__subtitle')
 
 
-function setPopupImgOpened(evt) {
+function setPopupCardImgOpened(evt) {
     popupImg.classList.add ('popup_opened');
-    popupImage.src = evt.currentTarget.src;
+    popupImage.src = evt.target.src;
     popupSubtitle.textContent = evt.currentTarget.textContent;
 }
-function touchToCard () {
+function clickOnCardImage () {
     currentCard.forEach((currentImage) => {
-currentImage.addEventListener('click', setPopupImgOpened);
+currentImage.addEventListener('click', setPopupCardImgOpened);
 })}
-touchToCard ()
+clickOnCardImage ()
