@@ -79,9 +79,9 @@ function formSubmitHandlerCard (evt) {
 popupFormCard.addEventListener('submit', formSubmitHandlerCard);
 
 function addOneCard (link, name) {
+
 const card = document.querySelector('#card').content.querySelector('.element');
 const elements = document.querySelector('.elements');    
-
 const addElement = card.cloneNode(true);
     addElement.querySelector('.element__image').src = link;
     addElement.querySelector('.element__title').textContent = name;
@@ -102,7 +102,8 @@ elementCards()
 const trashCan = document.querySelectorAll('.element__trash')
 
 function deleteCard (evt) {
-const listItem = evt.currentTarget.closest('.element');
+const listItem = evt.target.closest('.element');
+event.stopPropagation()
 listItem.remove();
 }
 
@@ -118,12 +119,12 @@ listenerToDelete ()
 const elementLike = document.querySelectorAll('.element__like');
 
 function likeOnOff (evt) {
-    if (evt.currentTarget.style.opacity === '0.5') {
+    if (evt.currentTarget.style.opacity === '1') {
+    evt.currentTarget.style.backgroundImage = 'url(./images/like.svg)'
+    evt.currentTarget.style.opacity = '0.8'
+    } else {
     evt.currentTarget.style.backgroundImage = 'url(./images/like-active.svg)'
     evt.currentTarget.style.opacity = '1'
-    } else {
-    evt.currentTarget.style.backgroundImage = 'url(./images/like.svg)'
-    evt.currentTarget.style.opacity = '0.5'
     }
 } 
 
@@ -140,9 +141,12 @@ const popupSubtitle = document.querySelector('.popup__subtitle')
 
 
 function setPopupCardImgOpened(evt) {
+    let miss = event.target.closest('.element__case');
+    if (miss) return;
     popupImg.classList.add ('popup_opened');
     popupImage.src = evt.target.src;
     popupSubtitle.textContent = evt.currentTarget.textContent;
+
 }
 function clickOnCardImage () {
     currentCard.forEach((currentImage) => {
