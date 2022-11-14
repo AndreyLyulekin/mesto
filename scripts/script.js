@@ -85,6 +85,9 @@ const elements = document.querySelector('.elements');
 const addElement = card.cloneNode(true);
     addElement.querySelector('.element__image').src = link;
     addElement.querySelector('.element__title').textContent = name;
+    addElement.querySelector('.element__trash').addEventListener('click', deleteCard)
+    addElement.querySelector('.element__like').addEventListener('click', likeOnOff)
+    addElement.addEventListener('click', setPopupCardImgOpened)
     elements.prepend(addElement);
 }
 
@@ -134,6 +137,8 @@ function likeFillByTouch () {
 })}
 likeFillByTouch ()
 
+// просмотр карточки
+
 const popupImg = document.querySelector('.popup_scale-image')
 const currentCard = document.querySelectorAll('.element')
 const popupImage = document.querySelector('.popup__image')
@@ -146,7 +151,8 @@ function setPopupCardImgOpened(evt) {
     popupImg.classList.add ('popup_opened');
     popupImage.src = evt.target.src;
     popupSubtitle.textContent = evt.currentTarget.textContent;
-
+    console.log(evt.currentTarget)
+    console.log(evt.target)
 }
 function clickOnCardImage () {
     currentCard.forEach((currentImage) => {
