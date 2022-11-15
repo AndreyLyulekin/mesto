@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,9 @@
     <title lang="ru">Mesto Russia</title>
     <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 <body>
-
-
-
-<!-- Popup редактирования профиля -->
+    <!-- Popup редактирования профиля -->
     <div class="popup popup_profile">
         <div class="popup__container popup__container-profile">
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -23,8 +22,7 @@
             </form>
         </div>
     </div>
-
-<!-- Popup добаваления карточки -->
+    <!-- Popup добаваления карточки -->
     <div class='popup popup_card'>
         <div class="popup__container popup__container-card">
             <h2 class="popup__title">Новое место</h2>
@@ -36,24 +34,18 @@
             </form>
         </div>
     </div>
-
-<!-- Popup просмотра картинки -->
+    <!-- Popup просмотра картинки -->
     <div class='popup popup_scale-image'>
         <div class='popup__content-image'>
-               <img src="#" alt='' class="popup__image"> 
-               <figcaption class="popup__subtitle"></figcaption>
-               <button type="button" class="popup__exit popup__exit-img" aria-label="Закрыть попап"></button>
+            <img src="#" alt='Место' class="popup__image">
+            <figcaption class="popup__subtitle"></figcaption>
+            <button type="button" class="popup__exit popup__exit-img" aria-label="Закрыть попап"></button>
         </div>
     </div>
-
-
-
-
-
     <div class="root">
         <header class="header">
             <img src="./images/logo.svg" class="header__logo" alt="Логотип">
-        </header>  
+        </header>
         <main>
             <section class="profile">
                 <img src="./images/avatar.jpg" class="profile__photo" alt="Ваш аватар">
@@ -82,7 +74,9 @@
                 <button class="element__like" aria-label="Кнопка лайка" type="button"></button>
             </div>
         </div>
-    </template> 
+    </template>
+    <script src="./scripts/consts.js" defer></script>
     <script src="./scripts/script.js" defer></script>
 </body>
+
 </html>

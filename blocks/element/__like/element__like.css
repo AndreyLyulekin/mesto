@@ -10,8 +10,3 @@
     background-position: center;
     background-color: transparent;
 }
-
-.element__like:hover {
-    opacity: 0.5;
-}
-
