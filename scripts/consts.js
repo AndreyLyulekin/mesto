@@ -2,7 +2,7 @@ const buttonProfileEdit = document.querySelector('.profile__edit-btn');
 const buttonPopupAddCard = document.querySelector('.profile__add-btn');
 const cardTitleInput = document.querySelector('.popup__input_card_title');
 const cardLinkInput = document.querySelector('.popup__input_card_link');
-const cards = document.querySelector('.elements');
+const cardsContainer = document.querySelector('.elements');
 const card = document.querySelector('#card').content.querySelector('.element');
 const formExitBtnProfile = document.querySelector('.popup__exit-profile');
 const formExitBtnCard = document.querySelector('.popup__exit-card');
@@ -17,9 +17,7 @@ const popupImg = document.querySelector('.popup_scale-image')
 const popupImage = document.querySelector('.popup__image')
 const popupSubtitle = document.querySelector('.popup__subtitle')
 const popupProfile = document.querySelector('.popup_profile');
-const trashCan = document.querySelectorAll('.element__trash')
 const jobInput = document.querySelector('.popup__input_type_job');
-const elementTitle = document.querySelector('.element__title');
 
 
 const initialCards = [{

@@ -11,7 +11,7 @@ formExitBtnImg.addEventListener('click', () => togglePopup(popupImg));
 formExitBtnCard.addEventListener('click', () => togglePopup(popupCard));
 buttonPopupAddCard.addEventListener('click', () => togglePopup(popupCard));
 
-// редактирование профиля  cards
+// редактирование профиля
 
 function openPopupEditProfile() {
     togglePopup(popupProfile)
@@ -19,14 +19,14 @@ function openPopupEditProfile() {
     jobInput.value = newJob.textContent;
 }
 
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     newName.textContent = nameInput.value;
     newJob.textContent = jobInput.value;
     togglePopup(popupProfile)
 }
 
-popupFormProfile.addEventListener('submit', formSubmitHandler);
+popupFormProfile.addEventListener('submit', handleProfileFormSubmit);
 buttonProfileEdit.addEventListener('click', openPopupEditProfile);
 
 // Добавление карточек
@@ -44,11 +44,12 @@ popupFormCard.addEventListener('submit', handleCardFormSubmit);
 function addOneCard(link, name) {
     const cardElement = card.cloneNode(true);
     cardElement.querySelector('.element__image').src = link;
+    cardElement.querySelector('.element__image').alt = name;
     cardElement.querySelector('.element__title').textContent = name;
     cardElement.querySelector('.element__trash').addEventListener('click', deleteCard)
-    cardElement.querySelector('.element__like').addEventListener('click', likeOnOff)
+    cardElement.querySelector('.element__like').addEventListener('click', toggleLike)
     cardElement.querySelector('.element__image').addEventListener('click', setPopupCardImgOpened)
-    cards.prepend(cardElement);
+    cardsContainer.prepend(cardElement);
 }
 
 function addInitialCards() {
@@ -67,7 +68,7 @@ function deleteCard(evt) {
 
 // лайк
 
-function likeOnOff(evt) {
+function toggleLike(evt) {
     evt.target.classList.toggle('element__like_active');
 }
 
@@ -76,6 +77,7 @@ function likeOnOff(evt) {
 function setPopupCardImgOpened(evt) {
     togglePopup(popupImg)
     popupImage.src = evt.target.src;
+    popupImage.alt = evt.currentTarget.nextElementSibling.innerText;
     popupSubtitle.textContent = evt.currentTarget.nextElementSibling.innerText;
 }
 
