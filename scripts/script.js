@@ -63,7 +63,6 @@ function handleCardFormSubmit(evt) {
     createCard(cardLinkInput.value, cardTitleInput.value)
     evt.target.reset();
     togglePopup(popupCard)
-    const popupBtn = document.querySelector('.popup__btn')
     evt.submitter.classList.add('popup__btn-inactive')
     evt.submitter.disabled = true
 }
