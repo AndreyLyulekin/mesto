@@ -20,6 +20,7 @@ const popupProfile = document.querySelector('.popup_profile');
 const jobInput = document.querySelector('.popup__input_type_job');
 
 
+
 const initialCards = [{
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
