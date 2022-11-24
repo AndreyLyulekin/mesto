@@ -1,7 +1,7 @@
-const popupMissClick = document.querySelectorAll('.popup');
+const allPopups = document.querySelectorAll('.popup');
 
 
-popupMissClick.forEach((item) => item.addEventListener('mousedown', (evt) => {
+allPopups.forEach((item) => item.addEventListener('mousedown', (evt) => {
     if (evt.target === document.querySelector('.popup_opened')) {
         togglePopup(document.querySelector('.popup_opened'))
     }
@@ -60,28 +60,35 @@ buttonProfileEdit.addEventListener('click', openPopupEditProfile);
 
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
-    addOneCard(cardLinkInput.value, cardTitleInput.value)
-    cardTitleInput.value = ''
-    cardLinkInput.value = ''
+    createCard(cardLinkInput.value, cardTitleInput.value)
+    evt.target.reset();
     togglePopup(popupCard)
+    const popupBtn = document.querySelector('.popup__btn')
+    evt.submitter.classList.add('popup__btn-inactive')
+    evt.submitter.disabled = true
 }
 
 popupFormCard.addEventListener('submit', handleCardFormSubmit);
 
-function addOneCard(link, name) {
+function createCard(link, name) {
     const cardElement = card.cloneNode(true);
-    cardElement.querySelector('.element__image').src = link;
-    cardElement.querySelector('.element__image').alt = name;
+    const elementImage = cardElement.querySelector('.element__image')
+    elementImage.src = link;
+    elementImage.alt = name;
     cardElement.querySelector('.element__title').textContent = name;
+    addCard (cardElement, elementImage)
+    cardsContainer.prepend(cardElement);
+}
+
+function addCard (cardElement, elementImage) {
     cardElement.querySelector('.element__trash').addEventListener('click', deleteCard)
     cardElement.querySelector('.element__like').addEventListener('click', toggleLike)
-    cardElement.querySelector('.element__image').addEventListener('click', setPopupCardImgOpened)
-    cardsContainer.prepend(cardElement);
+    elementImage.addEventListener('click', setPopupCardImgOpened)
 }
 
 function addInitialCards() {
     initialCards.forEach((item) => {
-        addOneCard(item.link, item.name)
+        createCard(item.link, item.name)
     })
 }
 
@@ -103,8 +110,8 @@ function toggleLike(evt) {
 
 function setPopupCardImgOpened(evt) {
     togglePopup(popupImg)
-    popupImage.src = evt.target.src;
-    popupImage.alt = evt.currentTarget.nextElementSibling.innerText;
+    imagePopup.src = evt.target.src;
+    imagePopup.alt = evt.currentTarget.nextElementSibling.innerText;
     popupSubtitle.textContent = evt.currentTarget.nextElementSibling.innerText;
 }
 
