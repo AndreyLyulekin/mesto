@@ -55,6 +55,11 @@ function enableValidation(settings) {
 
 }
 
+ function disableSubmitButton (btn) {
+    btn.submitter.classList.add('popup__btn-inactive')
+    btn.submitter.disabled = true
+ }
+
 enableValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',

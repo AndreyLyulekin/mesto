@@ -63,26 +63,31 @@ function handleCardFormSubmit(evt) {
     createCard(cardLinkInput.value, cardTitleInput.value)
     evt.target.reset();
     togglePopup(popupCard)
-    evt.submitter.classList.add('popup__btn-inactive')
-    evt.submitter.disabled = true
+    disableSubmitButton(evt)
 }
 
 popupFormCard.addEventListener('submit', handleCardFormSubmit);
 
+
 function createCard(link, name) {
+    addCard(prepareCard(link, name))
+}
+
+function prepareCard(link, name) {
     const cardElement = card.cloneNode(true);
     const elementImage = cardElement.querySelector('.element__image')
     elementImage.src = link;
     elementImage.alt = name;
     cardElement.querySelector('.element__title').textContent = name;
-    addCard (cardElement, elementImage)
-    cardsContainer.prepend(cardElement);
-}
-
-function addCard (cardElement, elementImage) {
     cardElement.querySelector('.element__trash').addEventListener('click', deleteCard)
     cardElement.querySelector('.element__like').addEventListener('click', toggleLike)
     elementImage.addEventListener('click', setPopupCardImgOpened)
+    return cardElement
+}
+
+
+function addCard(cardElement) {
+    cardsContainer.prepend(cardElement);
 }
 
 function addInitialCards() {
