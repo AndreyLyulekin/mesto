@@ -1,3 +1,4 @@
+const allPopups = document.querySelectorAll('.popup');
 const buttonProfileEdit = document.querySelector('.profile__edit-btn');
 const buttonPopupAddCard = document.querySelector('.profile__add-btn');
 const cardTitleInput = document.querySelector('.popup__input_card_title');
@@ -14,12 +15,10 @@ const popupFormProfile = document.querySelector('.popup__container-profile');
 const popupFormCard = document.querySelector('.popup__container-card');
 const popupCard = document.querySelector('.popup_card');
 const popupImg = document.querySelector('.popup_scale-image')
-const imagePopup = document.querySelector('.popup__image')
 const popupSubtitle = document.querySelector('.popup__subtitle')
 const popupProfile = document.querySelector('.popup_profile');
+const imagePopup = document.querySelector('.popup__image')
 const jobInput = document.querySelector('.popup__input_type_job');
-
-
 
 const initialCards = [{
         name: 'Архыз',
@@ -46,3 +45,8 @@ const initialCards = [{
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
+export {allPopups, buttonProfileEdit, buttonPopupAddCard, cardTitleInput, cardLinkInput,
+cardsContainer, card, formExitBtnProfile, formExitBtnCard, formExitBtnImg,
+newName, newJob, nameInput, popupFormProfile, popupFormCard, popupCard,
+popupImg, popupSubtitle, popupProfile, imagePopup, jobInput, initialCards}

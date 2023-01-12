@@ -1,70 +1,86 @@
-let isInputsGood = false
-
 //проверка на валидность инпутов
 
-function checkValidity(currentInput, submitCurrentButton, settings) {
-    if (currentInput.validity.valid) {
-        // убрать красную обводку
-        hideErrors(currentInput, submitCurrentButton, settings)
-
-    } else {
-        // добавить красную обводку
-        showErrors(currentInput, submitCurrentButton, settings)
+export default class FormValidator {
+    constructor(settings) {
+        this._isInputsGood = false;
+        this.formSelector = settings.formSelector;
+        this.inputSelector = settings.inputSelector;
+        this.submitButtonSelector = settings.submitButtonSelector;
+        this.inactiveButtonClass = settings.inactiveButtonClass;
+        this.inputErrorClass = settings.inputErrorClass;
+        this.errorClass = settings.errorClass;
     }
-}
-
-//функция описания инпутов и обьявления пользователю ошибки
-function showErrors(currentInput, submitCurrentButton, settings) {
-
-    currentInput.classList.add(settings.inputErrorClass)
-    currentInput.nextElementSibling.textContent = currentInput.validationMessage
-    toggleBtnStateActive(submitCurrentButton, settings)
-}
-
-function hideErrors(currentInput, submitCurrentButton, settings) {
-
-    currentInput.classList.remove(settings.inputErrorClass)
-    currentInput.nextElementSibling.textContent = ''
-    toggleBtnStateActive(submitCurrentButton, settings)
-}
-
-// тогл кнопки сабмит
-function toggleBtnStateActive(submitCurrentButton, settings) {
-    if (!isInputsGood) {
-        submitCurrentButton.classList.add(settings.errorClass)
-        submitCurrentButton.disabled = true
-    } else {
-        submitCurrentButton.classList.remove(settings.errorClass)
-        submitCurrentButton.disabled = false
+    
+    _toggleBtnStateActive(submitCurrentButton) {
+        if (!this._isInputsGood) {
+            submitCurrentButton.classList.add(this.errorClass)
+            submitCurrentButton.disabled = true
+        } else {
+            submitCurrentButton.classList.remove(this.errorClass)
+            submitCurrentButton.disabled = false
+        }
     }
-}
 
-function enableValidation(settings) {
-    const formElements = document.querySelectorAll(settings.formSelector)
-
-    Array.from(formElements).forEach((currentForm) => {
-        const inputs = currentForm.querySelectorAll(settings.inputSelector)
-        const submitCurrentButton = currentForm.querySelector(settings.submitButtonSelector)
-        Array.from(inputs).forEach((currentInput) => {
-            currentInput.addEventListener('input', () => {
-                isInputsGood = Array.from(inputs).every((input) => input.validity.valid)
-                checkValidity(currentInput, submitCurrentButton, settings)
+    _showErrors(currentInput, submitCurrentButton) {
+        currentInput.classList.add(this.inputErrorClass)
+        currentInput.nextElementSibling.textContent = currentInput.validationMessage
+        this._toggleBtnStateActive(submitCurrentButton)
+    }
+    
+    _hideErrors(currentInput, submitCurrentButton) {
+        currentInput.classList.remove(this.inputErrorClass)
+        currentInput.nextElementSibling.textContent = ''
+        this._toggleBtnStateActive(submitCurrentButton)
+    }
+    
+    _checkValidity(currentInput, submitCurrentButton) {
+        if (currentInput.validity.valid) {
+            // убрать красную обводку
+            this._hideErrors(currentInput, submitCurrentButton)
+        } else {
+            // добавить красную обводку
+            this._showErrors(currentInput, submitCurrentButton)
+        }
+    }
+    
+    _setEventListeners() {
+    this._toggleSubmitButtonSelector() ;
+    this._inputList.forEach((inputElement) => {
+    
+    inputElement.addEventListener('input', () => {
+    this._checkInputvalidity (inputElement );
+    this._toggleSubmitButtonselector();
             })
         })
-    })
+    }
+    
+    enableValidation() {
+        const formElements = document.querySelectorAll(this.formSelector)
+        Array.from(formElements).forEach((currentForm) => {
+            const inputs = currentForm.querySelectorAll(this.inputSelector)
+            const submitCurrentButton = currentForm.querySelector(this.submitButtonSelector)
+            Array.from(inputs).forEach((currentInput) => {
+                currentInput.addEventListener('input', () => {
+                    this._isInputsGood = Array.from(inputs).every((input) => input.validity.valid)
+                    this._checkValidity(currentInput, submitCurrentButton)
+                })
+            })
+        })
+    }
 
+    disableSubmitButton (btn) {
+        btn.submitter.classList.add('popup__btn-inactive')
+        btn.submitter.disabled = true
+     }
 }
+    
 
- function disableSubmitButton (btn) {
-    btn.submitter.classList.add('popup__btn-inactive')
-    btn.submitter.disabled = true
- }
 
-enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__btn',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'input_red-error',
-    errorClass: 'popup__btn-inactive',
-});
+
+
+
+
+
+
+
+    

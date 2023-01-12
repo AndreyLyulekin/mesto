@@ -1,5 +1,18 @@
-const allPopups = document.querySelectorAll('.popup');
+import {allPopups, buttonProfileEdit, buttonPopupAddCard, cardTitleInput, cardLinkInput,
+cardsContainer, card, formExitBtnProfile, formExitBtnCard, formExitBtnImg,
+newName, newJob, nameInput, popupFormProfile, popupFormCard, popupCard,
+popupImg, popupSubtitle, popupProfile, imagePopup, jobInput, initialCards} from './consts.js'
+import Card from './Card.js'
+import FormValidator from './validate.js'
 
+const validation = new FormValidator({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__btn',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'input_red-error',
+    errorClass: 'popup__btn-inactive',
+})
 
 allPopups.forEach((item) => item.addEventListener('mousedown', (evt) => {
     if (evt.target === document.querySelector('.popup_opened')) {
@@ -15,10 +28,9 @@ function closePopupByKeydownEsc(evt) {
     }
 }
 
-
 // открытие/закрытие попапов
 
-function togglePopup(currentPopup) {
+export function togglePopup(currentPopup) {
     event.stopPropagation()
     currentPopup.classList.toggle('popup_opened');
 
@@ -36,7 +48,6 @@ formExitBtnImg.addEventListener('click', () => togglePopup(popupImg));
 //попап добавления карточки
 formExitBtnCard.addEventListener('click', () => togglePopup(popupCard));
 buttonPopupAddCard.addEventListener('click', () => togglePopup(popupCard));
-
 
 // редактирование профиля
 
@@ -63,31 +74,15 @@ function handleCardFormSubmit(evt) {
     createCard(cardLinkInput.value, cardTitleInput.value)
     evt.target.reset();
     togglePopup(popupCard)
-    disableSubmitButton(evt)
+    validation.disableSubmitButton(evt)
 }
 
 popupFormCard.addEventListener('submit', handleCardFormSubmit);
 
 
 function createCard(link, name) {
-    addCard(prepareCard(link, name))
-}
-
-function prepareCard(link, name) {
-    const cardElement = card.cloneNode(true);
-    const elementImage = cardElement.querySelector('.element__image')
-    elementImage.src = link;
-    elementImage.alt = name;
-    cardElement.querySelector('.element__title').textContent = name;
-    cardElement.querySelector('.element__trash').addEventListener('click', deleteCard)
-    cardElement.querySelector('.element__like').addEventListener('click', toggleLike)
-    elementImage.addEventListener('click', setPopupCardImgOpened)
-    return cardElement
-}
-
-
-function addCard(cardElement) {
-    cardsContainer.prepend(cardElement);
+    const cardInctance = new Card({link, name}, card)
+    cardsContainer.prepend(cardInctance.generateCard())
 }
 
 function addInitialCards() {
@@ -96,27 +91,20 @@ function addInitialCards() {
     })
 }
 
-// удаления карточки из дом
-
-function deleteCard(evt) {
-    const listItem = evt.target.closest('.element');
-    event.stopPropagation()
-    listItem.remove();
-}
-
-// лайк
-
-function toggleLike(evt) {
-    evt.target.classList.toggle('element__like_active');
-}
-
 // просмотр карточки
 
-function setPopupCardImgOpened(evt) {
+export function setPopupCardImgOpened(evt) {
     togglePopup(popupImg)
     imagePopup.src = evt.target.src;
     imagePopup.alt = evt.currentTarget.nextElementSibling.innerText;
     popupSubtitle.textContent = evt.currentTarget.nextElementSibling.innerText;
 }
 
+
 addInitialCards()
+
+
+
+//
+
+validation.enableValidation()
