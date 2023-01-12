@@ -3,43 +3,29 @@ cardsContainer, card, formExitBtnProfile, formExitBtnCard, formExitBtnImg,
 newName, newJob, nameInput, popupFormProfile, popupFormCard, popupCard,
 popupImg, popupSubtitle, popupProfile, imagePopup, jobInput, initialCards} from './consts.js'
 import Card from './Card.js'
-import FormValidator from './validate.js'
+import FormValidator from './FormValidator.js'
+import togglePopup from './utils.js'
 
-const validation = new FormValidator({
-    formSelector: '.popup__form',
+const formProfile = document.querySelector('.popup_profile').querySelector('.popup__form');
+const formCard = document.querySelector('.popup_card').querySelector('.popup__form');
+
+const validationSettings = {
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__btn',
-    inactiveButtonClass: 'popup__button_disabled',
+    inactiveButtonClass: 'popup__btn-inactive',
     inputErrorClass: 'input_red-error',
     errorClass: 'popup__btn-inactive',
-})
+}
+
+const validationFormProfile = new FormValidator(formProfile, validationSettings)
+const validationFormCard = new FormValidator(formCard, validationSettings)
 
 allPopups.forEach((item) => item.addEventListener('mousedown', (evt) => {
-    if (evt.target === document.querySelector('.popup_opened')) {
-        togglePopup(document.querySelector('.popup_opened'))
+    const popupOpened = document.querySelector('.popup_opened')
+    if (evt.target === popupOpened) {
+        togglePopup(popupOpened)
     }
 }));
-
-
-function closePopupByKeydownEsc(evt) {
-
-    if (evt.key === "Escape") {
-        togglePopup(document.querySelector('.popup_opened'))
-    }
-}
-
-// открытие/закрытие попапов
-
-export function togglePopup(currentPopup) {
-    event.stopPropagation()
-    currentPopup.classList.toggle('popup_opened');
-
-    if (!!document.querySelector('.popup_opened')) {
-        document.addEventListener('keydown', closePopupByKeydownEsc)
-    } else {
-        document.removeEventListener('keydown', closePopupByKeydownEsc)
-    }
-}
 
 //закрытие попапа редактирования профайла
 formExitBtnProfile.addEventListener('click', () => togglePopup(popupProfile));
@@ -74,7 +60,8 @@ function handleCardFormSubmit(evt) {
     createCard(cardLinkInput.value, cardTitleInput.value)
     evt.target.reset();
     togglePopup(popupCard)
-    validation.disableSubmitButton(evt)
+    validationFormProfile.disableSubmitButton(evt.submitter)
+    validationFormCard.disableSubmitButton(evt.submitter)
 }
 
 popupFormCard.addEventListener('submit', handleCardFormSubmit);
@@ -102,9 +89,5 @@ export function setPopupCardImgOpened(evt) {
 
 
 addInitialCards()
-
-
-
-//
-
-validation.enableValidation()
+validationFormProfile.enableValidation()
+validationFormCard.enableValidation()

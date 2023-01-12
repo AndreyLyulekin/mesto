@@ -1,4 +1,4 @@
-import {togglePopup} from './index.js' 
+import togglePopup from './utils.js' 
 import {imagePopup, popupSubtitle, popupImg} from './consts.js' 
 
 

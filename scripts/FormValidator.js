@@ -1,9 +1,9 @@
 //проверка на валидность инпутов
 
 export default class FormValidator {
-    constructor(settings) {
+    constructor(form, settings) {
         this._isInputsGood = false;
-        this.formSelector = settings.formSelector;
+        this.form = form;
         this.inputSelector = settings.inputSelector;
         this.submitButtonSelector = settings.submitButtonSelector;
         this.inactiveButtonClass = settings.inactiveButtonClass;
@@ -53,24 +53,26 @@ export default class FormValidator {
             })
         })
     }
-    
+
+    _getInputs() {
+        return Array.from(this.form.querySelectorAll(this.inputSelector))
+    }
+    _getSubmitCurrentButton() {
+        return this.form.querySelector(this.submitButtonSelector)
+    }
+
     enableValidation() {
-        const formElements = document.querySelectorAll(this.formSelector)
-        Array.from(formElements).forEach((currentForm) => {
-            const inputs = currentForm.querySelectorAll(this.inputSelector)
-            const submitCurrentButton = currentForm.querySelector(this.submitButtonSelector)
-            Array.from(inputs).forEach((currentInput) => {
-                currentInput.addEventListener('input', () => {
-                    this._isInputsGood = Array.from(inputs).every((input) => input.validity.valid)
-                    this._checkValidity(currentInput, submitCurrentButton)
-                })
+        this._getInputs().forEach((currentInput) => {
+            currentInput.addEventListener('input', () => {
+                this._isInputsGood = this._getInputs().every((input) => input.validity.valid)
+                this._checkValidity(currentInput, this._getSubmitCurrentButton())
             })
         })
     }
 
-    disableSubmitButton (btn) {
-        btn.submitter.classList.add('popup__btn-inactive')
-        btn.submitter.disabled = true
+    disableSubmitButton (button) {
+        button.classList.add(this.inactiveButtonClass)
+        button.disabled = true
      }
 }
     
