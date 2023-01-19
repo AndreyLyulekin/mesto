@@ -1,0 +1,16 @@
+.overlay__form {
+	width: 430px;
+	height: 330px;
+	background-color: white;
+	position: relative;
+	gap: 50px;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+}
+
+@media screen and (max-width: 420px) {
+    .overlay__form {
+        width: 282px;
+        height: 322px;
+    }
+}
