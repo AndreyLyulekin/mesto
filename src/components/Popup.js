@@ -3,6 +3,7 @@ export class Popup {
     this.currentPopup = document.querySelector(popupSelector);
     this.closeBtn = this.currentPopup.querySelector(".popup__exit");
     this._handleEscClose = this._handleEscClose.bind(this);
+    this.open = this.open.bind(this);
   }
   open() {
     this.currentPopup.classList.add("popup_opened");
@@ -17,8 +18,12 @@ export class Popup {
       this.close();
     }
   }
-  setEventListeners(openButton) {
-    openButton.addEventListener("click", () => this.open());
+  setEventListeners() {
+    this.currentPopup.addEventListener("click", (e) => {
+      if (e.target.classList.contains("popup")) {
+        this.close();
+      }
+    });
     this.closeBtn.addEventListener("click", () => this.close());
   }
 }

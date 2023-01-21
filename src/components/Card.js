@@ -1,9 +1,14 @@
 export class Card {
-  constructor(data, cardTemplate, handleImagePopupOpen) {
+  constructor(data, cardTemplateSelector, handleImagePopupOpen) {
     this._link = data.link;
     this._name = data.name;
-    this._cardTemplate = cardTemplate;
+    this._cardTemplate = document
+      .querySelector("template")
+      .content.querySelector(cardTemplateSelector);
     this.handleImagePopupOpen = handleImagePopupOpen;
+    this._deleteCard = this._deleteCard.bind(this);
+    this._cardLike = this._cardLike.bind(this);
+    this._cardPopup = this._cardPopup.bind(this);
   }
 
   _getTemplate() {
@@ -12,6 +17,8 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._likeButton = this._element.querySelector(".element__like");
+    this._trashButton = this._element.querySelector(".element__trash");
     this._cardImage = this._element.querySelector(".element__image");
     this._setEventListeners();
     this._cardImage.src = this._link;
@@ -21,30 +28,21 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".element__trash")
-      .addEventListener("click", (evt) => {
-        this._deleteCard(evt);
-      });
-    this._element
-      .querySelector(".element__like")
-      .addEventListener("click", (evt) => {
-        this._cardLike(evt);
-      });
-    this._cardImage.addEventListener("click", (evt) => {
-      this._cardPopup(evt);
-    });
+    this._trashButton.addEventListener("click", this._deleteCard);
+    this._likeButton.addEventListener("click", this._cardLike);
+    this._cardImage.addEventListener("click", this._cardPopup);
   }
 
-  _deleteCard(evt) {
-    evt.target.closest(".element").remove();
+  _deleteCard() {
+    this._element.remove();
+    this._element = null;
   }
 
-  _cardLike(evt) {
-    evt.target.classList.toggle("element__like_active");
+  _cardLike() {
+    this._likeButton.classList.toggle("element__like_active");
   }
 
-  _cardPopup(evt) {
-    this.handleImagePopupOpen(evt);
+  _cardPopup() {
+    this.handleImagePopupOpen(this._name, this._link);
   }
 }

@@ -8,15 +8,10 @@ export class PopupWithImage extends Popup {
     this.open = this.open.bind(this);
   }
 
-  setEventListeners() {
-    this.closeBtn.addEventListener("click", () => this.close());
-  }
-
-  open(evt) {
+  open(name, link) {
     super.open();
-    this.image.src = evt.target.src;
-    this.image.alt = evt.currentTarget.nextElementSibling.innerText;
-    this.subtitle.textContent = evt.currentTarget.nextElementSibling.innerText;
-    this.setEventListeners();
+    this.image.src = link;
+    this.image.alt = name;
+    this.subtitle.textContent = name;
   }
 }

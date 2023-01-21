@@ -1,79 +1,73 @@
-//проверка на валидность инпутов
-
 export class FormValidator {
   constructor(form, settings) {
     this._isInputsGood = false;
-    this.form = form;
+    this._form = form;
     this.inputSelector = settings.inputSelector;
-    this.submitButtonSelector = settings.submitButtonSelector;
     this.inactiveButtonClass = settings.inactiveButtonClass;
     this.inputErrorClass = settings.inputErrorClass;
     this.errorClass = settings.errorClass;
+    this._submitButton = this._form.querySelector(
+      settings.submitButtonSelector
+    );
   }
 
-  _toggleBtnStateActive(submitCurrentButton) {
+  _toggleBtnStateActive() {
     if (!this._isInputsGood) {
-      submitCurrentButton.classList.add(this.errorClass);
-      submitCurrentButton.disabled = true;
+      this._disableSubmitButton();
     } else {
-      submitCurrentButton.classList.remove(this.errorClass);
-      submitCurrentButton.disabled = false;
+      this._enableSubmitButton();
     }
   }
 
-  _showErrors(currentInput, submitCurrentButton) {
+  _disableSubmitButton() {
+    this._submitButton.classList.add(this.errorClass);
+    this._submitButton.disabled = true;
+  }
+  _enableSubmitButton() {
+    this._submitButton.classList.remove(this.errorClass);
+    this._submitButton.disabled = false;
+  }
+
+  _showErrors(currentInput) {
     currentInput.classList.add(this.inputErrorClass);
     currentInput.nextElementSibling.textContent =
       currentInput.validationMessage;
-    this._toggleBtnStateActive(submitCurrentButton);
+    this._toggleBtnStateActive();
   }
 
-  _hideErrors(currentInput, submitCurrentButton) {
+  _hideErrors(currentInput) {
     currentInput.classList.remove(this.inputErrorClass);
-    currentInput.nextElementSibling.textContent = "";
-    this._toggleBtnStateActive(submitCurrentButton);
+    const errorMessageElement = this._form.querySelector(
+      `#errorMessage-${currentInput.name}`
+    );
+    errorMessageElement.textContent = "";
+    this._toggleBtnStateActive();
   }
 
-  _checkValidity(currentInput, submitCurrentButton) {
+  _checkValidity(currentInput) {
     if (currentInput.validity.valid) {
-      // убрать красную обводку
-      this._hideErrors(currentInput, submitCurrentButton);
+      this._hideErrors(currentInput);
     } else {
-      // добавить красную обводку
-      this._showErrors(currentInput, submitCurrentButton);
+      this._showErrors(currentInput);
     }
   }
 
-  _setEventListeners() {
-    this._toggleSubmitButtonSelector();
-    this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
-        this._checkInputvalidity(inputElement);
-        this._toggleSubmitButtonselector();
-      });
-    });
-  }
-
-  _getInputs() {
-    return Array.from(this.form.querySelectorAll(this.inputSelector));
-  }
-  _getSubmitCurrentButton() {
-    return this.form.querySelector(this.submitButtonSelector);
+  _findInputs() {
+    this._inputs = Array.from(this._form.querySelectorAll(this.inputSelector));
   }
 
   enableValidation() {
-    this._getInputs().forEach((currentInput) => {
+    this._findInputs();
+    this._form.addEventListener("submit", () => {
+      this._disableSubmitButton();
+    });
+    this._inputs.forEach((currentInput) => {
       currentInput.addEventListener("input", () => {
-        this._isInputsGood = this._getInputs().every(
+        this._isInputsGood = this._inputs.every(
           (input) => input.validity.valid
         );
-        this._checkValidity(currentInput, this._getSubmitCurrentButton());
+        this._checkValidity(currentInput);
       });
     });
-  }
-
-  disableSubmitButton(button) {
-    button.classList.add(this.inactiveButtonClass);
-    button.disabled = true;
   }
 }

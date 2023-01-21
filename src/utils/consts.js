@@ -1,7 +1,5 @@
 const buttonProfileEdit = document.querySelector(".profile__edit-btn");
 const buttonPopupAddCard = document.querySelector(".profile__add-btn");
-const cardsContainer = document.querySelector(".elements");
-const card = document.querySelector("#card").content.querySelector(".element");
 const formProfile = document
   .querySelector(".popup_profile")
   .querySelector(".popup__form");
@@ -47,8 +45,6 @@ const validationSettings = {
 export {
   buttonProfileEdit,
   buttonPopupAddCard,
-  cardsContainer,
-  card,
   formCard,
   formProfile,
   validationSettings,
