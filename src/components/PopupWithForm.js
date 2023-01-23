@@ -13,6 +13,14 @@ export class PopupWithForm extends Popup {
     }, {});
   }
 
+  setInputValue(userInfo) {
+    Array.from(this._inputList).forEach((input) => {
+      if (Object.hasOwn(userInfo, input.name)) {
+        input.value = userInfo[input.name];
+      }
+    });
+  }
+
   close() {
     super.close();
     this._form.reset();

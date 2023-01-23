@@ -37,7 +37,7 @@ const newSectionElement = new Section(
 
 const popupProfileInstance = new PopupWithForm(".popup_profile", (values) => {
   const { userName, userJob } = values;
-  userInfo.setUserInfo({ newName: userName, newInfo: userJob });
+  userInfo.setUserInfo({ newName: userName, newJob: userJob });
 });
 const popupWithImage = new PopupWithImage(".popup_scale-image");
 const popupCardInstance = new PopupWithForm(".popup_card", (values) => {
@@ -45,8 +45,19 @@ const popupCardInstance = new PopupWithForm(".popup_card", (values) => {
   newSectionElement.addItem(createCard(urlCard, cardName));
 });
 
-buttonProfileEdit.addEventListener("click", popupProfileInstance.open);
-buttonPopupAddCard.addEventListener("click", popupCardInstance.open);
+const editProfileButtonHandler = () => {
+  popupProfileInstance.setInputValue(userInfo.getUserInfo());
+  validationFormProfile.disableSubmitButton();
+  popupProfileInstance.open();
+};
+
+const addCardButtonHandler = () => {
+  validationFormCard.disableSubmitButton();
+  popupCardInstance.open();
+};
+
+buttonProfileEdit.addEventListener("click", editProfileButtonHandler);
+buttonPopupAddCard.addEventListener("click", addCardButtonHandler);
 popupProfileInstance.setEventListeners();
 popupCardInstance.setEventListeners();
 popupWithImage.setEventListeners();
@@ -54,7 +65,7 @@ popupWithImage.setEventListeners();
 function createCard(link, name) {
   return new Card(
     { link, name },
-    ".element",
+    "#card-template",
     popupWithImage.open
   ).generateCard();
 }
