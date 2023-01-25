@@ -11,6 +11,10 @@
     opacity: 0;
     transition: all 0.5s ease-in-out;
     cursor: pointer;
+    background-image: url(../../../images/Edit-Button.svg);
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+    background-position: center;
 }
 
 .profile__avatar-change:hover {
