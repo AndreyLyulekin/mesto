@@ -7,16 +7,16 @@
 
 @media screen and (min-width: 768px) {
     .elements {
-    grid-template-columns: repeat(2, min-content);
-    column-gap: 17px;
-    justify-content: center;
+        grid-template-columns: repeat(2, min-content);
+        column-gap: 17px;
+        justify-content: center;
     }
 }
 
 @media screen and (min-width: 1280px) {
     .elements {
-    grid-template-columns: repeat(3, min-content);
-    padding: 51px 0 0;
+        grid-template-columns: repeat(3, min-content);
+        padding: 51px 0 0;
     }
 }
 
