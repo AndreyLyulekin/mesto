@@ -1,17 +1,16 @@
-import { Api } from "./Api";
-import { apiCredentials } from "../../utils/consts";
+import { Api } from './Api';
 
 export class CardsService extends Api {
-  constructor() {
+  constructor(apiCredentials) {
     super(apiCredentials);
   }
 
   getAllCards() {
-    return super.get("/cards");
+    return super.get('/cards');
   }
 
   addNewCard(cardData) {
-    return super.post("/cards", cardData);
+    return super.post('/cards', cardData);
   }
 
   deleteCard(cardId) {
@@ -20,13 +19,13 @@ export class CardsService extends Api {
 
   setLikeActive(cardId) {
     if (!cardId) {
-      console.warn("[cardId] is lost somewhere!");
+      console.warn('[cardId] is lost somewhere!');
     }
     return super.put(`/cards/${cardId}/likes`);
   }
   setLikeInActive(cardId) {
     if (!cardId) {
-      console.warn("[cardId] is lost somewhere!");
+      console.warn('[cardId] is lost somewhere!');
     }
     return super.delete(`/cards/${cardId}/likes`);
   }

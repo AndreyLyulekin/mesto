@@ -14,4 +14,4 @@
 ### Описание:
 Сайт клон инстаграма, версия студента Яндекс.Практикума
 
-[Посмотреть работу на сайте](https://andreylyulekin.github.io/mesto/)
+[Посмотреть работу на сайте](https://github.com/AndreyLyulekin/mesto/branches)

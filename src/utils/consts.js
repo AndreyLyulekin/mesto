@@ -6,8 +6,6 @@ const formCard = document.querySelector('.popup_card').querySelector('.popup__fo
 const formAvatar = document.querySelector('.popup_avatar').querySelector('.popup__form');
 const formDelete = document.querySelector('.popup_card-delete').querySelector('.popup__form');
 
-const deleteCardIdKey = 'cardDeleteId';
-
 const validationSettings = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__btn',
@@ -24,7 +22,6 @@ export {
   formProfile,
   formDelete,
   validationSettings,
-  deleteCardIdKey,
   buttonPopupChangeAvatar,
 };
 

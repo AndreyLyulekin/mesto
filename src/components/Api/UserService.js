@@ -1,24 +1,22 @@
-import { Api } from "./Api";
-import { apiCredentials } from "../../utils/consts";
+import { Api } from './Api';
 
 export class UserService extends Api {
-  constructor() {
+  constructor(apiCredentials) {
     super(apiCredentials);
   }
 
   getCurrentUser() {
-    return this.get("/users/me").then((response) => {
-      localStorage.setItem("userId", response?._id);
-
+    return this.get('/users/me').then((response) => {
+      localStorage.setItem('userId', response?._id);
       return response;
     });
   }
 
   updateUserInfo(userInfo) {
-    return super.patch("/users/me", userInfo);
+    return super.patch('/users/me', userInfo);
   }
 
   changeAvatar(avatarData) {
-    return super.patch("/users/me/avatar", avatarData);
+    return super.patch('/users/me/avatar', avatarData);
   }
 }

@@ -1,17 +1,22 @@
-import { Popup } from "./Popup.js";
+import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
   constructor(popupSelector, submitFormCallBack) {
     super(popupSelector);
     this.submitFormCallBack = submitFormCallBack;
-    this._form = this.currentPopup.querySelector("form");
-    this._submitButton = this.currentPopup.querySelector(".popup__btn");
-    this._inputList = this._form.querySelectorAll(".popup__input");
+    this._form = this.currentPopup.querySelector('form');
+    this._submitButton = this.currentPopup.querySelector('.popup__btn');
+    this._inputList = this._form.querySelectorAll('.popup__input');
   }
   _getInputValues() {
     return Array.from(this._inputList).reduce((acc, item) => {
       return { ...acc, [item.name]: item.value };
     }, {});
+  }
+
+  _handleSubmit(evt) {
+    evt.preventDefault();
+    this.submitFormCallBack(this._getInputValues());
   }
 
   setInputValue(userInfo) {
@@ -31,13 +36,8 @@ export class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
   }
-
-  _handleSubmit(evt) {
-    evt.preventDefault();
-    this.submitFormCallBack(this._getInputValues());
-  }
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => this._handleSubmit(evt));
+    this._form.addEventListener('submit', (evt) => this._handleSubmit(evt));
   }
 }

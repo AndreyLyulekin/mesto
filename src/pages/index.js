@@ -5,10 +5,10 @@ import {
   formCard,
   formProfile,
   validationSettings,
-  deleteCardIdKey,
   buttonPopupChangeAvatar,
   formAvatar,
   formDelete,
+  apiCredentials,
 } from '../utils/consts.js';
 import { FormValidator } from '../components/FormValidator';
 import { UserInfo } from '../components/UserInfo';
@@ -18,6 +18,7 @@ import { Section } from '../components/Section';
 import { Card } from '../components/Card';
 import { CardsService } from '../components/Api/CardsService';
 import { UserService } from '../components/Api/UserService';
+import { CardDeletePopup } from '../components/CardDeletePopup';
 
 /*
  * Инициализируем валидаторы
@@ -30,8 +31,8 @@ const validationFormDeleteCard = new FormValidator(formDelete, validationSetting
 /*
  * Инициализируем сервисы для работы с сервером
  */
-const cardService = new CardsService();
-const userService = new UserService();
+const cardService = new CardsService(apiCredentials);
+const userService = new UserService(apiCredentials);
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
@@ -39,9 +40,9 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__photo',
 });
 
-const newSectionElement = new Section((cardData) => {
+const cardsSection = new Section((cardData) => {
   const cardElement = createCard(cardData);
-  newSectionElement.addItem(cardElement);
+  cardsSection.addItem(cardElement);
 }, '.elements');
 
 /*
@@ -62,6 +63,10 @@ const userInfoPopup = new PopupWithForm('.popup_profile', ({ userName, userJob }
         userInfoPopup.close();
         userInfoPopup.changeSubmitButtonText('Сохранить');
       }, 500);
+    })
+    .catch((e) => {
+      userInfoPopup.changeSubmitButtonText('Ошибка!');
+      console.error(e?.reason || e?.message);
     });
 });
 const popupWithImage = new PopupWithImage('.popup_scale-image');
@@ -74,58 +79,74 @@ const newCardPopup = new PopupWithForm('.popup_card', (values) => {
       name: values.cardName,
     })
     .then((cardData) => {
-      newSectionElement.addItem(createCard(cardData));
+      cardsSection.addItem(createCard(cardData));
       newCardPopup.changeSubmitButtonText('Готово!');
       setTimeout(() => {
         newCardPopup.close();
         newCardPopup.changeSubmitButtonText('Сохранить');
       }, 500);
+    })
+    .catch((e) => {
+      newCardPopup.changeSubmitButtonText('Ошибка!');
+      console.error(e?.reason || e?.message);
     });
 });
-const cardDeletePopup = new PopupWithForm('.popup_card-delete', () => {
-  const cardId = localStorage.getItem(deleteCardIdKey);
+const cardDeletePopup = new CardDeletePopup('.popup_card-delete', (deleteCardInstance) => {
+  const cardId = deleteCardInstance.getCardId();
   cardDeletePopup.changeSubmitButtonText('Удаляем...');
   validationFormDeleteCard.disableSubmitButton();
-  cardService.deleteCard(cardId).then(() => {
-    newSectionElement.deleteItem(cardId);
-    cardDeletePopup.changeSubmitButtonText('Готово!');
-    setTimeout(() => {
-      cardDeletePopup.close();
-      validationFormDeleteCard.enableSubmitButton();
-    }, 500);
-  });
+  cardService
+    .deleteCard(cardId)
+    .then(() => {
+      deleteCardInstance.deleteCard();
+      cardDeletePopup.changeSubmitButtonText('Готово!');
+      setTimeout(() => {
+        cardDeletePopup.close();
+        validationFormDeleteCard.enableSubmitButton();
+      }, 500);
+    })
+    .catch((e) => {
+      cardDeletePopup.changeSubmitButtonText('Ошибка!');
+      console.error(e?.reason || e?.message);
+    });
 });
 const changeAvatarPopup = new PopupWithForm('.popup_avatar', ({ avatar }) => {
   changeAvatarPopup.changeSubmitButtonText('Сохраняем...');
   validationFormAvatar.disableSubmitButton();
-  userService.changeAvatar({ avatar }).then(() => {
-    changeAvatarPopup.changeSubmitButtonText('Готово!');
-    setTimeout(() => {
-      changeAvatarPopup.close();
-      changeAvatarPopup.changeSubmitButtonText('Сохранить');
-    }, 500);
-  });
+  userService
+    .changeAvatar({ avatar })
+    .then(() => {
+      userInfo.setAvatar(avatar);
+      changeAvatarPopup.changeSubmitButtonText('Готово!');
+      setTimeout(() => {
+        changeAvatarPopup.close();
+        changeAvatarPopup.changeSubmitButtonText('Сохранить');
+      }, 500);
+    })
+    .catch((e) => {
+      changeAvatarPopup.changeSubmitButtonText('Ошибка!');
+      console.error(e?.reason || e?.message);
+    });
 });
 
 /*
  * Навешиваем слушатели и описываем обработчики
  */
-const editProfileButtonHandler = () => {
+const openProfilePopup = () => {
   userInfoPopup.setInputValue(userInfo.getUserInfo());
-  validationFormProfile.disableSubmitButton();
   userInfoPopup.open();
 };
-const addCardButtonHandler = () => {
+const openAddCardPopup = () => {
   validationFormCard.disableSubmitButton();
   newCardPopup.open();
 };
-const avatarButtonHandler = () => {
+const openAvatarPopup = () => {
   validationFormAvatar.disableSubmitButton();
   changeAvatarPopup.open();
 };
-buttonProfileEdit.addEventListener('click', editProfileButtonHandler);
-buttonPopupAddCard.addEventListener('click', addCardButtonHandler);
-buttonPopupChangeAvatar.addEventListener('click', avatarButtonHandler);
+buttonProfileEdit.addEventListener('click', openProfilePopup);
+buttonPopupAddCard.addEventListener('click', openAddCardPopup);
+buttonPopupChangeAvatar.addEventListener('click', openAvatarPopup);
 userInfoPopup.setEventListeners();
 newCardPopup.setEventListeners();
 cardDeletePopup.setEventListeners();
@@ -135,46 +156,56 @@ popupWithImage.setEventListeners();
 /*
  * Определяем утилитарную функцию создания карточек
  */
-function handleLikeButton() {
-  this._cardLikesCountElement.textContent = 'loading...';
+function handleLikeClick(cardInstance) {
+  cardInstance.setLoadingState('loading...');
+  const cardId = cardInstance.getCardId();
 
-  if (this.likeButton.classList.contains('element__like_active')) {
-    cardService.setLikeInActive(this.cardId).then(({ likes }) => {
-      this.setLikeInActive(likes?.length);
-    });
+  if (cardInstance.checkIsLiked()) {
+    cardService
+      .setLikeInActive(cardId)
+      .then(({ likes }) => {
+        cardInstance.setLikeInActive(likes?.length);
+      })
+      .catch((e) => {
+        cardInstance.setLoadingState('error');
+        console.error(e?.reason || e?.message);
+      });
   } else {
-    cardService.setLikeActive(this.cardId).then(({ likes }) => {
-      this.setLikeActive(likes?.length);
-    });
+    cardService
+      .setLikeActive(cardId)
+      .then(({ likes }) => {
+        cardInstance.setLikeActive(likes?.length);
+      })
+      .catch((e) => {
+        cardInstance.setLoadingState('error');
+        console.error(e?.reason || e?.message);
+      });
   }
 }
 
-function handleDeletePopup() {
-  cardDeletePopup.open();
-  validationFormDeleteCard.enableValidation();
+function handleDeleteClick(cardInstance) {
+  cardDeletePopup.open(cardInstance);
 }
 
 function createCard(cardData) {
-  return new Card(cardData, '#card-template', {
-    handleImagePopupOpen: popupWithImage.open,
-    handleLikeButton,
-    handleDeletePopup,
-  }).generateCard();
+  const cardInstance = new Card(cardData, '#card-template', {
+    handleImageClick: popupWithImage.open,
+    handleLikeClick: () => handleLikeClick(cardInstance),
+    handleDeleteClick: () => handleDeleteClick(cardInstance),
+  });
+
+  return cardInstance.generateCard();
 }
 
 /*
  * Запрашиваем карточки и данные пользователя
  */
-Promise.allSettled([cardService.getAllCards(), userService.getCurrentUser()]).then(([cardsAnswer, userInfoAnswer]) => {
-  if (cardsAnswer.status === 'fulfilled') {
-    newSectionElement.renderItems(cardsAnswer.value);
-  }
-  if (userInfoAnswer.status === 'fulfilled') {
-    const userData = userInfoAnswer.value;
-    localStorage.setItem('userId', userInfo._id);
-    userInfo.setUserInfo(userData);
-  }
-});
+Promise.all([userService.getCurrentUser(), cardService.getAllCards()])
+  .then(([userInfoAnswer, cardsAnswer]) => {
+    userInfo.setUserInfo(userInfoAnswer);
+    cardsSection.renderItems(cardsAnswer);
+  })
+  .catch((e) => console.error(e?.reason || e?.message));
 
 /*
  * Активируем валидацию
