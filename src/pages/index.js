@@ -134,14 +134,17 @@ const changeAvatarPopup = new PopupWithForm('.popup_avatar', ({ avatar }) => {
  */
 const openProfilePopup = () => {
   userInfoPopup.setInputValue(userInfo.getUserInfo());
+  userInfoPopup.changeSubmitButtonText('Сохранить');
   userInfoPopup.open();
 };
 const openAddCardPopup = () => {
   validationFormCard.disableSubmitButton();
+  newCardPopup.changeSubmitButtonText('Создать');
   newCardPopup.open();
 };
 const openAvatarPopup = () => {
   validationFormAvatar.disableSubmitButton();
+  changeAvatarPopup.changeSubmitButtonText('Сохранить');
   changeAvatarPopup.open();
 };
 buttonProfileEdit.addEventListener('click', openProfilePopup);
@@ -184,6 +187,7 @@ function handleLikeClick(cardInstance) {
 }
 
 function handleDeleteClick(cardInstance) {
+  cardDeletePopup.changeSubmitButtonText('Да');
   cardDeletePopup.open(cardInstance);
 }
 
