@@ -135,16 +135,19 @@ const changeAvatarPopup = new PopupWithForm('.popup_avatar', ({ avatar }) => {
 const openProfilePopup = () => {
   userInfoPopup.setInputValue(userInfo.getUserInfo());
   userInfoPopup.changeSubmitButtonText('Сохранить');
+  validationFormProfile.hideAllPopupErrors()
   userInfoPopup.open();
 };
 const openAddCardPopup = () => {
   validationFormCard.disableSubmitButton();
   newCardPopup.changeSubmitButtonText('Создать');
+  validationFormCard.hideAllPopupErrors()
   newCardPopup.open();
 };
 const openAvatarPopup = () => {
   validationFormAvatar.disableSubmitButton();
   changeAvatarPopup.changeSubmitButtonText('Сохранить');
+  validationFormAvatar.hideAllPopupErrors()
   changeAvatarPopup.open();
 };
 buttonProfileEdit.addEventListener('click', openProfilePopup);

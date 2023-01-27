@@ -50,6 +50,13 @@ export class FormValidator {
     this._submitButton.disabled = false;
   }
 
+  hideAllPopupErrors() {
+    this._inputs.forEach((currentInput) => {
+    this._hideErrors(currentInput)
+    currentInput.textContent = '';
+    });
+  }
+
   enableValidation() {
     this._findInputs();
     this._inputs.forEach((currentInput) => {
